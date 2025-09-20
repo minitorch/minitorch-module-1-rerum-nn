@@ -193,9 +193,9 @@ class Scalar:
         assert h is not None
         assert h.last_fn is not None
         assert h.ctx is not None
-        partials: Any = h.last_fn.backward(h.ctx, d_output)
+        partials: Any = h.last_fn.backward(h.ctx, d_output)  # type: ignore[attr-defined]
 
-        if not isinstance(partials, Tuple):
+        if not isinstance(partials, tuple):
             partials = (partials, )
 
         return [(a, b) for a, b in zip(h.inputs, partials)]

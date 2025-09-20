@@ -72,7 +72,7 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     visited: set[int] = set()
     result: List[Variable] = []
 
-    def dfs(variable: Variable):
+    def dfs(variable: Variable) -> None:
         visited.add(variable.unique_id)
 
         for parent in variable.parents:

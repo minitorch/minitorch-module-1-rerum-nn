@@ -331,7 +331,7 @@ def relu_back(a: float, b: float) -> float:
 # - prod: take the product of lists
 
 
-def map(a: Iterable, f: Callable) -> Iterable:
+def map(a: Iterable[float], f: Callable[[float], float]) -> Iterable[float]:
     """Apply a function to each element of an iterable.
 
     Args:
@@ -347,7 +347,7 @@ def map(a: Iterable, f: Callable) -> Iterable:
     return [f(x) for x in a]
 
 
-def zipWith(a: Iterable, b: Iterable, f: Callable) -> Iterable:
+def zipWith(a: Iterable[float], b: Iterable[float], f: Callable[[float, float], float]) -> Iterable[float]:
     """Combine two iterables element-wise using a binary function.
 
     Args:
@@ -375,7 +375,7 @@ def zipWith(a: Iterable, b: Iterable, f: Callable) -> Iterable:
     return res
 
 
-def reduce(a: Iterable[float], start: float, f: Callable) -> float:
+def reduce(a: Iterable[float], start: float, f: Callable[[float, float], float]) -> float:
     """Reduce an iterable to a single value using a binary function.
 
     Args:
