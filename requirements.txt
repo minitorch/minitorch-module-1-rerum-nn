@@ -1,4 +1,3 @@
-mypy
 hypothesis == 6.54
 mypy == 0.971
 numba == 0.56
