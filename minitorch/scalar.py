@@ -160,30 +160,30 @@ class Scalar:
     def chain_rule(self, d_output: Any) -> Iterable[Tuple[Variable, Any]]:
         """
         Apply the chain rule to propagate derivatives backward through the computation graph.
-        
+
         This method implements the chain rule of calculus for automatic differentiation.
         Given the derivative of the output with respect to this variable (d_output),
         it computes the derivatives with respect to each input variable by calling
         the backward method of the function that created this variable.
-        
+
         The chain rule states that if z = f(x, y) and we have dz/dz = d_output,
         then:
         - dz/dx = dz/dz * dz/dx = d_output * (df/dx)
         - dz/dy = dz/dz * dz/dy = d_output * (df/dy)
-        
+
         where the partial derivatives df/dx and df/dy are computed by the function's
         backward method.
-        
+
         Args:
             d_output: The derivative of the output with respect to this variable.
                      This is typically the gradient flowing back from downstream
                      computations in the computation graph.
-        
+
         Returns:
             An iterable of tuples (variable, derivative) where:
             - variable: An input variable that contributed to this computation
             - derivative: The derivative of the output with respect to that input variable
-        
+
         Raises:
             AssertionError: If this variable has no history, no last function, or no context.
                            This indicates the variable is either a constant or incorrectly
@@ -193,13 +193,12 @@ class Scalar:
         assert h is not None
         assert h.last_fn is not None
         assert h.ctx is not None
-
         partials: Any = h.last_fn.backward(h.ctx, d_output)
+
         if not isinstance(partials, Tuple):
             partials = (partials, )
 
         return [(a, b) for a, b in zip(h.inputs, partials)]
-        
 
     def backward(self, d_output: Optional[float] = None) -> None:
         """

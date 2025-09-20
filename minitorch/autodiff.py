@@ -68,7 +68,7 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     Returns:
         Non-constant Variables in topological order starting from the right.
     """
-        
+
     visited: set[int] = set()
     result: List[Variable] = []
 
@@ -78,7 +78,7 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
         for parent in variable.parents:
             if parent.unique_id not in visited:
                 dfs(parent)
-        
+
         result.append(variable)
 
     dfs(variable)
@@ -112,6 +112,7 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
                 if partial_deriv.unique_id not in derivs:
                     derivs[partial_deriv.unique_id] = 0.0
                 derivs[partial_deriv.unique_id] += value
+
 
 @dataclass
 class Context:
